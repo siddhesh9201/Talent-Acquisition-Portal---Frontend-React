@@ -15,7 +15,6 @@ function Track() {
         }
 
         const url = `http://localhost:8080/seeker/application/client/${clientId}`;
-
         const response = await fetch(url, {
           method: "GET",
           headers: {
@@ -29,10 +28,7 @@ function Track() {
         }
 
         const data = await response.json();
-        console.log("Applications:", data);
-
         setApplications(data || []);
-   
       } catch (error) {
         console.error("Error fetching applications:", error);
       }
@@ -41,9 +37,25 @@ function Track() {
     fetchApplications();
   }, []);
 
+  
+  const getStatusClass = (status) => {
+    switch (status.toLowerCase()) {
+      case "pending":
+        return "bg-warning text-dark";
+      case "accepted":
+        return "bg-success";
+      case "rejected":
+        return "bg-danger";
+      case "in progress":
+        return "bg-info text-dark";
+      default:
+        return "bg-secondary";
+    }
+  };
+
   return (
     <div className="container my-5">
-      <h2 className="text-center mb-4" style={{ fontWeight: "bold" }}>
+      <h2 className="text-center mb-4 fw-bold ">
         Track Your Job Applications
       </h2>
 
@@ -55,28 +67,21 @@ function Track() {
         <div className="row justify-content-center">
           {applications.map((application) => (
             <div key={application.id} className="col-md-8 col-lg-6 mb-4">
-              <div className="card shadow-sm border-0 rounded-3 hover-effect">
-                <div
-                  className="card-header text-white"
-                  style={{ backgroundColor: "#0d6efd" }} 
-                >
-                  <h5 className="mb-0">{application.job.companyName}</h5>
-                </div>
-                <div className="card-body">
-                  <h5 className="card-title">{application.job.title}</h5>
-                  <p className="card-text text-muted">{application.job.type}</p>
-                  <span
-                    className="badge"
-                    style={{
-                      backgroundColor: "#00a6ffff",
-                      color: "#000",
-                      fontWeight: "bold",
-                    }}
-                  >
+              <div className="card shadow rounded-4 h-100 border-0">
+                <div className="card-header d-flex justify-content-between align-items-center text-white fw-bold" style={{ backgroundColor: "#0d6efd" }}>
+                  <span>{application.job.companyName}</span>
+                  <span className={`badge ${getStatusClass(application.status)} rounded-pill`}>
                     {application.status}
                   </span>
                 </div>
-                <div className="card-footer text-muted text-center">
+                <div className="card-body">
+                  <h5 className="card-title fw-bold">{application.job.title}</h5>
+                  <p className="card-text text-muted">{application.job.type}</p>
+                  <p className="text-muted mb-0">
+                    Location: {application.job.location || "Not specified"}
+                  </p>
+                </div>
+                <div className="card-footer text-muted text-center small">
                   Applied on: {application.appliedDate}
                 </div>
               </div>
@@ -84,13 +89,6 @@ function Track() {
           ))}
         </div>
       )}
-
-      <style>{`
-        .hover-effect:hover {
-          transform: translateY(-5px);
-          transition: transform 0.3s ease;
-        }
-      `}</style>
     </div>
   );
 }

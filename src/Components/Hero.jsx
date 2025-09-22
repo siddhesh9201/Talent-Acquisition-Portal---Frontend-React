@@ -29,7 +29,7 @@ function HeroSection() {
 
   return (
     <>
-      {/* Toast Notification */}
+   
       {showToast && (
         <div
           className="toast show position-fixed top-0 end-0 m-3"
@@ -54,7 +54,7 @@ function HeroSection() {
         </div>
       )}
 
-      {/* Hero Section */}
+      
       <div
         className="text-center text-white d-flex flex-column justify-content-center align-items-center position-relative mx-auto"
         style={{

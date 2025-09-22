@@ -2,7 +2,7 @@ import React from "react";
 import speaker from "../assets/Speaker2.png";
 import search from "../assets/search.png";
 import track from "../assets/track.png";
-import { Link } from "react-router-dom"; // corrected import
+import { Link } from "react-router-dom";
 function ActionCards() {
   return (
     <div className="d-flex flex-wrap justify-content-center gap-3">

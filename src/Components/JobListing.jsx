@@ -12,9 +12,8 @@ function JobListing() {
   const role = localStorage.getItem("role");
   const token = localStorage.getItem("token");
 
-  const location = useLocation(); // to detect navigation changes
+  const location = useLocation();
 
-  // Fetch all jobs
   const getAllJobs = async () => {
     setLoading(true);
     try {
@@ -41,7 +40,7 @@ function JobListing() {
   });
 
   const onDeleteClick = async (jobId) => {
-   alert("Are you sure you want to delete this job?");
+    alert("Are you sure you want to delete this job?");
     try {
       const url = `http://localhost:8080/recruiter/delete/${jobId}`;
       const response = await fetch(url, {
@@ -54,7 +53,7 @@ function JobListing() {
 
       if (response.ok) {
         console.log("Job deleted successfully");
-        setRefresh((prev) => !prev); 
+        setRefresh((prev) => !prev);
       } else {
         console.error("Failed to delete job:", response.status);
       }
@@ -100,14 +99,15 @@ function JobListing() {
                     {jobItem.location}
                   </p>
 
-                  {role != "RECRUITER" && (<Link
-                    to={`/Apply/${jobItem.id}`}
-                    className="btn btn-primary me-2"
-                  >
-                    Apply
-                  </Link>)}
+                  {role != "RECRUITER" && (
+                    <Link
+                      to={`/Apply/${jobItem.id}`}
+                      className="btn btn-primary me-2"
+                    >
+                      Apply
+                    </Link>
+                  )}
 
-                
                   {role === "RECRUITER" &&
                     jobItem.recruiterEmail?.trim().toLowerCase() ===
                       email?.toLowerCase() && (
@@ -118,25 +118,18 @@ function JobListing() {
                       >
                         Delete
                       </button>
-
-                      
                     )}
 
-              
-              {role === "RECRUITER" &&
-  jobItem.recruiterEmail?.trim().toLowerCase() ===
-    email?.toLowerCase() && (
-    <Link
-      to={`/applications/${jobItem.id}`}
-      className="btn btn-info me-2"
-    >
-      View Applications
-    </Link>
-)}
-
-              
-              
-                    
+                  {role === "RECRUITER" &&
+                    jobItem.recruiterEmail?.trim().toLowerCase() ===
+                      email?.toLowerCase() && (
+                      <Link
+                        to={`/applications/${jobItem.id}`}
+                        className="btn btn-info me-2"
+                      >
+                        View Applications
+                      </Link>
+                    )}
                 </div>
               </div>
             </div>

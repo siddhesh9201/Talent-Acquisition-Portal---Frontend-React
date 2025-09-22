@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../assets/bg.png"; // replace with your image path
+import logo from "../assets/bg.png";
 
 function Footer() {
   return (
@@ -8,7 +8,6 @@ function Footer() {
         className="text-center p-3 d-flex justify-content-between align-items-center"
         style={{ backgroundColor: "rgba(0, 0, 0, 0.05)" }}
       >
-        {/* Left side: Logo/Image */}
         <div>
           <img
             src={logo}
@@ -17,7 +16,6 @@ function Footer() {
           />
         </div>
 
-        {/* Center: Copyright */}
         <div>
           © {new Date().getFullYear()} Copyright:{" "}
           <a className="text-body" href="https://mdbootstrap.com/">
@@ -25,7 +23,6 @@ function Footer() {
           </a>
         </div>
 
-        {/* Right side: Extra image/icon */}
         <div>
           <img
             src="https://img.icons8.com/ios-filled/50/000000/facebook-new.png"
