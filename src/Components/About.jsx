@@ -15,7 +15,7 @@ function JobFormUI() {
   const token = localStorage.getItem("token");
   const email = localStorage.getItem("email") || "";
   const name = localStorage.getItem("name") || "";
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   const onPHandle = async (event) => {
     event.preventDefault();
 
@@ -48,14 +48,15 @@ function JobFormUI() {
 
       console.log("Response status:", response.status);
 
-      const msg = await response.json().catch(() => ({ message: "Invalid response format" }));
+      const msg = await response
+        .json()
+        .catch(() => ({ message: "Invalid response format" }));
 
       if (!response.ok) {
         alert(msg.message || "Something went wrong!");
         return;
       }
 
-      // Clear form fields after successful submission
       jTitle.current.value = "";
       jDescription.current.value = "";
       jType.current.value = "";
@@ -63,8 +64,8 @@ function JobFormUI() {
       jCompanyName.current.value = "";
       jSalaryRange.current.value = "";
       jExpiryDate.current.value = "";
-      jEmail.current.value = email; // Reset to default
-      jName.current.value = name;   // Reset to default
+      jEmail.current.value = email;
+      jName.current.value = name;
 
       alert("Job added successfully!");
       navigate("/");
