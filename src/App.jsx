@@ -16,6 +16,7 @@ import LoginPopUp from './Components/LoginPopUp';
 import Profile from './Components/Profile';
 import { AuthProvider } from './Components/Authcontext';
 import ApplicationsList from './Components/Applications';
+import PortFolio from './Components/PortFolio'
 
 function App() {
       
@@ -43,6 +44,7 @@ function App() {
          <Route path= '/Profile' element ={<Profile/>}/>
          <Route path="/applications/:jobId" element={<ApplicationsList />} />
       <Route path='/*' element={  <PageNotFoung/>}/>
+      <Route path='/PortFolio'element={<PortFolio/>}/>
     </Routes>
   </AuthProvider>
     </>
